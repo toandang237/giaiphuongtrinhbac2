@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giải phương trình bậc 2</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <style>
+        h1 {
+            text-transform: uppercase;
+            color: blue;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            function ptbac2(a, b, c)
+            {
+                var kq = "";
+                var del = Math.pow(b, 2) - (4 * a * c);
+                if (a == 0)
+                    if (b == 0)
+                        if (c == 0)
+                            kq = "Phương trình có vô số nghiệm";
+                        else kq = "Phương trình vô nghiệm"
+                    else {
+                        var x = -b/c;
+                        kq = "Phương trình có 1 nghiệm duy nhất x = " + x;
+                    }
+                else
+                {
+                    if (del > 0)
+                    {
+                        var x1 = (-b + Math.sqrt(del)) / (2 * a);
+                        var x2 = (-b - Math.sqrt(del)) / (2 * a);
+                        kq = "Phương trình có 2 nghiệm x1 = " + x1 + " x2 = " + x2;
+                    }
+                    else if (del == 0) {
+                        var x = -b / (2 * a);
+                        kq = "Phương trình có nghiệm kép x = " + x;
+                    }
+                    else
+                        kq = "Phương trình vô nghiệm"
+                }
+                return kq;
+            }
+
+            $("#giai").click(function() {
+                var m = $("#ida").val();
+                var n = $("#idb").val();
+                var p = $("#idc").val();
+                var kqua = ptbac2(m, n, p);
+                //he số a
+                if (m == "") {
+                    $("#ida").css({
+                        "border": "1px solid red"
+                    })
+                }
+                else $("#ida").css({"border": "1px solid green"})
+
+                //hệ số b
+                if (n == "") 
+                {
+                    $("#idb").css({
+                        "border": "1px solid red"
+                    })
+                }
+                else $("#idb").css({"border": "1px solid green"})
+
+                //hệ số c
+                if (p == "") {
+                    $("#idc").css({
+                        "border": "1px solid red"
+                    })
+                }
+                else $("#idc").css({"border": "1px solid green"})
+
+                if (m != "" && n != "" && p != "")
+                    $("#kq").html(kqua);
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <h1>giải phương trình bậc 2 ax<sup>2</sup> + bx + c = 0</h1>
+    <table>
+        <tr>
+            <td colspan="6" style="text-align: center;">Nhập 3 hệ số của phương trình bậc 2</td>
+        </tr>
+        <tr id="content">
+            <td>Nhập hệ số a: </td>
+            <td>
+                <input type="text" id="ida">
+            </td>
+            <td>Nhập hệ số b: </td>
+            <td>
+                <input type="text" id="idb">
+            </td>
+            <td>Nhập hệ số c: </td>
+            <td>
+                <input type="text" id="idc">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align: left">
+                <input type="button" id="giai" value="Giải">
+            </td>
+        </tr>
+    </table>
+    <p id="kq"></p>
+</body>
+</html>
